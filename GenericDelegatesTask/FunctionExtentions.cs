@@ -29,8 +29,17 @@ namespace GenericDelegatesTask
         /// </example>
         public static Predicate<T> CombinePredicatesWithAnd<T>(Predicate<T>[] predicates)
         {
-            // TODO : Implement CombinePredicatesWithAnd<T>
-            throw new NotImplementedException();
+            return delegate (T item)
+            {
+                foreach (Predicate<T> predicate in predicates)
+                {
+                    if (!predicate(item))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            };
         }
     }
 }
